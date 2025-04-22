@@ -118,3 +118,8 @@ FIRST_ASSESMENT_BLESSON-round-2/
 ## How to Run
 1. pip install -r requirements.txt
 2. python app.py
+
+
+![image](https://github.com/user-attachments/assets/0c27931c-dabc-40b3-b88d-1c5bb392c3a6)
+
+
