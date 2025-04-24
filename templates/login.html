@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DBS Bank Statement Generator</title>
+    <title>Login | DBS Bank</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC&family=Noto+Sans+Tamil&display=swap" rel="stylesheet">
     <style>
+        /* Reuse all the CSS variables and base styles from the main page */
         :root {
-            /* Light Theme Variables */
             --primary-color: #ED1C24;
             --primary-light: #fef0f0;
             --primary-dark: #c4161d;
@@ -26,7 +26,7 @@
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --border-radius: 10px;
+            --border-radius: 4px;
             --header-bg: #ffffff;
             --footer-bg: #231F20;
             --footer-text: #ffffff;
@@ -35,7 +35,6 @@
             --input-border: #e5e7eb;
         }
 
-        /* Dark Theme Variables */
         html[data-theme='dark'] {
             --primary-color: #FF464E;
             --primary-light: #3d2325;
@@ -74,13 +73,12 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Enhanced header for statement generator */
-        /* Header styles */
+        /* Header styles (same as main page) */
         .header {
             background-color: var(--header-bg);
             border-bottom: 1px solid var(--light-gray);
@@ -89,6 +87,35 @@
             position: sticky;
             top: 0;
             z-index: 100;
+        }
+
+        .top-bar {
+            background-color: #f5f5f5;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--dark-gray);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-links a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .top-links a:hover {
+            color: var(--primary-color);
         }
 
         .header-content {
@@ -101,14 +128,17 @@
         .logo {
             display: flex;
             align-items: center;
-            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 40px;
+            margin-right: 10px;
         }
 
         .logo-text {
             font-size: 22px;
             font-weight: 700;
             color: var(--primary-color);
-            margin-left: 10px;
             letter-spacing: -0.5px;
         }
 
@@ -164,8 +194,6 @@
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
         }
 
         .login-button:hover {
@@ -191,307 +219,166 @@
             background-color: var(--light-gray);
         }
 
-        /* Mobile menu styles */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: var(--text-color);
-        }
-
-        @media (max-width: 992px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .navigation {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: var(--header-bg);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: var(--shadow-md);
-                z-index: 100;
-                text-align: center;
-            }
-            
-            .navigation.active {
-                display: flex;
-            }
-            
-            .nav-link {
-                padding: 12px;
-            }
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: var(--text-color);
-            padding: 8px;
-            border-radius: 50%;
+        /* Login form styles */
+        .auth-container {
             display: flex;
-            align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 60px 0;
         }
 
-        .theme-toggle:hover {
-            background-color: var(--light-gray);
-        }
-
-        .page-content {
-            padding: 40px 0;
-        }
-
-        .title-section {
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .title {
-            font-size: 32px;
-            color: var(--secondary-color);
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .subtitle {
-            font-size: 18px;
-            color: var(--dark-gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .card {
+        .auth-card {
             background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 32px;
-            margin-bottom: 32px;
-            border: 1px solid var(--light-gray);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
+            border-radius: 8px;
             box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border: 1px solid var(--light-gray);
         }
 
-        .form-group {
-            margin-bottom: 24px;
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        label {
+        .auth-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .auth-subtitle {
+            color: var(--medium-gray);
+            font-size: 16px;
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .auth-form .form-label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
             color: var(--secondary-color);
         }
 
-        input, select {
+        .auth-form .form-control {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 16px;
+            font-size: 16px;
             border: 1px solid var(--input-border);
             border-radius: var(--border-radius);
-            font-size: 16px;
-            transition: all 0.3s;
-            color: var(--text-color);
             background-color: var(--input-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s;
         }
 
-        input:focus, select:focus {
+        .auth-form .form-control:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(237, 28, 36, 0.15);
+            box-shadow: 0 0 0 3px rgba(237, 28, 36, 0.1);
         }
 
-        input::placeholder {
+        .auth-form .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 40px;
             color: var(--medium-gray);
         }
 
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--primary-color);
-            color: var(--white);
-            border: none;
-            padding: 14px 28px;
+        .auth-form .form-text {
+            display: block;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--medium-gray);
+        }
+
+        .auth-form .btn {
+            width: 100%;
+            padding: 14px;
             font-size: 16px;
             font-weight: 600;
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .button:hover {
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
             background-color: var(--primary-dark);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
         }
 
-        .button:active {
-            transform: translateY(0);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .button:disabled {
-            background-color: var(--medium-gray);
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .button i {
-            margin-right: 10px;
-            font-size: 18px;
-        }
-
-        .button-secondary {
-            background-color: transparent;
-            color: var(--text-color);
-            border: 1px solid var(--light-gray);
-        }
-
-        .button-secondary:hover {
-            background-color: var(--light-gray);
-            border-color: var(--medium-gray);
-        }
-
-        .preview-section {
-            display: none;
-            margin-top: 32px;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-title {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-light);
-        }
-
-        .customer-info {
-            padding: 24px;
-            background-color: var(--primary-light);
-            border-radius: var(--border-radius);
-            margin-bottom: 24px;
-            border: 1px solid rgba(237, 28, 36, 0.2);
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        .info-item {
-            margin-bottom: 16px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .label-text {
-            font-weight: 500;
-            font-size: 14px;
-            color: var(--dark-gray);
-            margin-bottom: 4px;
-        }
-
-        .info-value {
-            font-weight: 600;
-            font-size: 16px;
-            color: var(--secondary-color);
-        }
-
-        .action-buttons {
-            display: flex;
-            justify-content: flex-end;
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .loading {
-            display: none;
+        .auth-footer {
             text-align: center;
-            padding: 32px;
-            animation: fadeIn 0.5s ease-in-out;
+            margin-top: 20px;
+            color: var(--medium-gray);
         }
 
-        .loader {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(237, 28, 36, 0.2);
-            border-radius: 50%;
-            border-top-color: var(--primary-color);
-            animation: spin 1s ease-in-out infinite;
-            margin-bottom: 16px;
+        .auth-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .auth-footer a:hover {
+            text-decoration: underline;
         }
 
-        .alert {
-            padding: 16px;
-            border-radius: var(--border-radius);
-            margin-bottom: 24px;
+        .error-message {
+            color: var(--error-color);
+            font-size: 14px;
+            margin-top: 5px;
             display: none;
-            animation: fadeIn 0.3s ease-in-out;
-            display: flex;
-            align-items: center;
         }
 
-        .alert i {
-            margin-right: 12px;
-            font-size: 20px;
+        .form-group.error .error-message {
+            display: block;
         }
 
-        .alert-danger {
-            background-color: #fee2e2;
-            border: 1px solid #fecaca;
-            color: #b91c1c;
+        .form-group.error .form-control {
+            border-color: var(--error-color);
         }
 
-        .alert-success {
-            background-color: #d1fae5;
-            border: 1px solid #a7f3d0;
-            color: #047857;
+        .form-group.success .form-control {
+            border-color: var(--success-color);
         }
 
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            cursor: pointer;
+            color: var(--medium-gray);
+        }
+
+        /* Footer styles (same as main page) */
         .footer {
             background-color: var(--footer-bg);
             color: var(--footer-text);
-            padding: 40px 0;
-            margin-top: 64px;
+            padding: 60px 0 30px;
         }
 
         .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         .footer-logo {
             display: flex;
             align-items: center;
+            margin-bottom: 16px;
         }
 
         .footer-logo-text {
@@ -501,112 +388,121 @@
             margin-left: 10px;
         }
 
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--footer-text);
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+
         .footer-links {
             display: flex;
-            gap: 24px;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .footer-link {
             color: var(--footer-link);
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 14px;
         }
 
         .footer-link:hover {
             color: var(--footer-text);
         }
 
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-contact p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
         .footer-copyright {
-            margin-top: 24px;
-            padding-top: 16px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
             color: var(--medium-gray);
             font-size: 14px;
-            text-align: center;
         }
 
-        /* Progress bar */
-        .progress-container {
-            width: 100%;
-            background-color: var(--light-gray);
-            border-radius: 10px;
-            margin: 20px 0;
-            overflow: hidden;
-            height: 8px;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0;
-            background-color: var(--primary-color);
-            border-radius: 10px;
-            transition: width 0.4s ease;
-        }
-
-        /* Card decorative elements */
-        .card-decoration {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
-            opacity: 0.5;
-            z-index: -1;
-        }
-
-        .decoration-1 {
-            top: -50px;
-            right: -50px;
-        }
-
-        .decoration-2 {
-            bottom: -50px;
-            left: -50px;
-        }
-
-        .card-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Responsive Styles */
+        /* Responsive styles */
         @media (max-width: 768px) {
-            .page-content {
-                padding: 24px 0;
+            .auth-card {
+                padding: 30px 20px;
             }
             
-            .card {
-                padding: 24px;
-            }
-            
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .action-buttons .button {
-                width: 100%;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 24px;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 16px;
-                align-items: center;
+            .auth-title {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-links">
+                    <a href="#">Personal Banking</a>
+                    <a href="#">Wealth Management</a>
+                    <a href="#">Corporate Banking</a>
+                    <a href="#">SME Banking</a>
+                    <a href="#">About Us</a>
+                </div>
+                <div class="top-links">
+                    <a href="#">Contact Us</a>
+                    <a href="#">Locations</a>
+                    <a href="#">Singapore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="header">
         <div class="container">
             <div class="header-content">
@@ -614,18 +510,18 @@
                     <i class="fas fa-university fa-lg" style="color: var(--primary-color);"></i>
                     <span class="logo-text">DBS Bank</span>
                 </div>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <!-- <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
-                </button>
+                </button> -->
                 <nav class="navigation" id="navigation">
                     <a href="{{ url_for('home') }}" class="nav-link">Home</a>
-                    <a href="{{ url_for('credit_cards') }}" class="nav-link active">Credit Cards</a>
+                    <a href="{{ url_for('credit_cards') }}" class="nav-link">Credit Cards</a>
                     <a href="#benefits" class="nav-link">Benefits</a>
                     <a href="#apply" class="nav-link">Apply Now</a>
                     <a href="#faq" class="nav-link">FAQ</a>
                 </nav>
                 <div style="display: flex; align-items: center;">
-                    <a href="{{ url_for('login') }}" class="login-button">Login</a>
+                    <a href="{{ url_for('login') }}" class="login-button" style="background-color: transparent; color: var(--primary-color); border: 1px solid var(--primary-color);">Login</a>
                     <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
                         <i class="fas fa-moon"></i>
                     </button>
@@ -634,68 +530,91 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="page-content">
-            <div class="title-section">
-                <h1 class="title">Credit Card Statement Generator</h1>
-                <p class="subtitle">Generate and download your credit card statement in just a few clicks. Simple, secure, and convenient.</p>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Login to access your DBS account</p>
             </div>
-
-            <!-- <div class="alert alert-danger" id="errorAlert">
-                <i class="fas fa-exclamation-circle"></i>
-                <span id="errorMessage"></span>
-            </div> -->
-            
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-decoration decoration-1"></div>
-                    <div class="card-decoration decoration-2"></div>
-                    
-                    <form id="statementForm" action="/generate_statement" method="GET">
-                        <div class="form-group">
-                            <label for="customerId">Customer ID</label>
-                            <input type="number" id="customer_id" name="customer_id" required placeholder="Enter your customer ID">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="language">Statement Language</label>
-                            <select id="language" name="language">
-                                <option value="en">English</option>
-                                <option value="zh">Chinese</option>
-                                <option value="ms">Malay</option>
-                                <option value="ta">Tamil</option>
-                                <!-- Other languages will be loaded dynamically -->
-                            </select>
-                        </div>
-
-                        <button type="submit" id="previewButton" class="button">
-                            <i class="fas fa-search"></i> Generate pdf 
-                        </button>
-                    </form>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group" id="usernameGroup">
+                    <label for="username" class="form-label">Username or Customer ID</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username or customer ID" required>
+                    <i class="fas fa-user input-icon"></i>
+                    <div class="error-message" id="usernameError">Please enter a valid username or customer ID</div>
+                </div>
+                <div class="form-group" id="passwordGroup">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    <i class="fas fa-lock input-icon"></i>
+                    <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                    <div class="error-message" id="passwordError">Password must be at least 8 characters long</div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check" style="display: flex; align-items: center;">
+                        <input type="checkbox" id="rememberMe" class="form-check-input" style="margin-right: 10px;">
+                        <label for="rememberMe" class="form-check-label" style="font-size: 14px;">Remember me</label>
                     </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
+                    <p><a href="forgot-password.html">Forgot password?</a></p>
+                </div>
+            </form>
         </div>
     </div>
 
-    <div class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <i class="fas fa-university" style="color: var(--footer-text);"></i>
-                    <span class="footer-logo-text">DBS Bank</span>
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="fas fa-university fa-lg" style="color: var(--primary-color);"></i>
+                        <span class="footer-logo-text">DBS Bank</span>
+                    </div>
+                    <p>DBS is a leading financial services group in Asia with a presence in 18 markets. We are headquartered in Singapore.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Privacy Policy</a>
-                    <a href="#" class="footer-link">Terms of Service</a>
-                    <a href="#" class="footer-link">Contact Support</a>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Products</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Credit Cards</a>
+                        <a href="#" class="footer-link">Loans</a>
+                        <a href="#" class="footer-link">Savings Accounts</a>
+                        <a href="#" class="footer-link">Investments</a>
+                        <a href="#" class="footer-link">Insurance</a>
+                    </div>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Services</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Digital Banking</a>
+                        <a href="#" class="footer-link">Mobile Banking</a>
+                        <a href="#" class="footer-link">ATM Locator</a>
+                        <a href="#" class="footer-link">Branch Locator</a>
+                        <a href="#" class="footer-link">Financial Planning</a>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <p><i class="fas fa-phone"></i> +65 6327 2265</p>
+                    <p><i class="fas fa-envelope"></i> service@dbs.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 12 Marina Boulevard, Marina Bay Financial Centre Tower 3, Singapore 018982</p>
                 </div>
             </div>
             <div class="footer-copyright">
-                <p>&copy; <span id="currentYear"></span> DBS Bank. All rights reserved.</p>
+                <p>&copy; 2023 DBS Bank Ltd. Co. Reg. No. 196800306E. All rights reserved.</p>
             </div>
         </div>
-    </div>
+    </footer>
 
     <script>
         // Mobile menu toggle
@@ -776,7 +695,6 @@
                 }
             });
         });
-        // Add this script to the bottom of index.html before the closing </body> tag
     </script>
 </body>
 </html>

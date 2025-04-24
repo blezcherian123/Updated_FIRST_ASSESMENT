@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | DBS Bank</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC&family=Noto+Sans+Tamil&display=swap" rel="stylesheet">
+    <style>
+        /* Reuse all the CSS from login page */
+        :root {
+            --primary-color: #ED1C24;
+            --primary-light: #fef0f0;
+            --primary-dark: #c4161d;
+            --secondary-color: #231F20;
+            --text-color: #333333;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --light-gray: #e5e7eb;
+            --medium-gray: #9ca3af;
+            --dark-gray: #4b5563;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 4px;
+            --header-bg: #ffffff;
+            --footer-bg: #231F20;
+            --footer-text: #ffffff;
+            --footer-link: #9ca3af;
+            --input-bg: #ffffff;
+            --input-border: #e5e7eb;
+        }
+
+        html[data-theme='dark'] {
+            --primary-color: #FF464E;
+            --primary-light: #3d2325;
+            --primary-dark: #FF464E;
+            --secondary-color: #f3f4f6;
+            --text-color: #e5e7eb;
+            --bg-color: #111827;
+            --card-bg: #1f2937;
+            --light-gray: #374151;
+            --medium-gray: #6b7280;
+            --dark-gray: #9ca3af;
+            --white: #1f2937;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.16);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+            --header-bg: #1f2937;
+            --footer-bg: #111827;
+            --footer-text: #e5e7eb;
+            --footer-link: #9ca3af;
+            --input-bg: #374151;
+            --input-border: #4b5563;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles (same as main page) */
+        .header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--light-gray);
+            padding: 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar {
+            background-color: #f5f5f5;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--dark-gray);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-links a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .top-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            position: relative;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active:after {
+            width: 100%;
+        }
+
+        .login-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--text-color);
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            margin-left: 15px;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* Auth form styles */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+            padding: 60px 0;
+        }
+
+        .auth-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border: 1px solid var(--light-gray);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .auth-subtitle {
+            color: var(--medium-gray);
+            font-size: 16px;
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .auth-form .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .auth-form .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 1px solid var(--input-border);
+            border-radius: var(--border-radius);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s;
+        }
+
+        .auth-form .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(237, 28, 36, 0.1);
+        }
+
+        .auth-form .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            color: var(--medium-gray);
+        }
+
+        .auth-form .form-text {
+            display: block;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--medium-gray);
+        }
+
+        .auth-form .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--medium-gray);
+        }
+
+        .auth-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .form-group.error .form-control {
+            border-color: var(--error-color);
+        }
+
+        .form-group.success .form-control {
+            border-color: var(--success-color);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            cursor: pointer;
+            color: var(--medium-gray);
+        }
+
+        /* Footer styles (same as main page) */
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--footer-text);
+            margin-left: 10px;
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--footer-text);
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-link {
+            color: var(--footer-link);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-link:hover {
+            color: var(--footer-text);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-contact p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .footer-copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+            
+            .auth-title {
+                font-size: 24px;
+            }
+        }
+
+        /* Additional styles for signup form */
+        .name-fields {
+            display: flex;
+            gap: 15px;
+        }
+
+        .name-fields .form-group {
+            flex: 1;
+        }
+
+        .password-strength {
+            height: 4px;
+            background-color: var(--light-gray);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            background-color: var(--error-color);
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .terms-check input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        .terms-check label {
+            font-size: 14px;
+        }
+
+        .terms-check a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .terms-check a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-links">
+                    <a href="#">Personal Banking</a>
+                    <a href="#">Wealth Management</a>
+                    <a href="#">Corporate Banking</a>
+                    <a href="#">SME Banking</a>
+                    <a href="#">About Us</a>
+                </div>
+                <div class="top-links">
+                    <a href="#">Contact Us</a>
+                    <a href="#">Locations</a>
+                    <a href="#">Singapore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-university fa-lg" style="color: var(--primary-color);"></i>
+                    <span class="logo-text">DBS Bank</span>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="navigation" id="navigation">
+                    <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                    <a href="{{ url_for('credit_cards') }}" class="nav-link">Credit Cards</a>
+                    <a href="#benefits" class="nav-link">Benefits</a>
+                    <a href="#apply" class="nav-link">Apply Now</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                </nav>
+                <div style="display: flex; align-items: center;">
+                    <a href="{{ url_for('login') }}" class="login-button">Login</a>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">Create Your Account</h1>
+                <p class="auth-subtitle">Join DBS Bank today and enjoy exclusive benefits</p>
+            </div>
+            <form class="auth-form" id="signupForm">
+                <div class="name-fields">
+                    <div class="form-group" id="firstNameGroup">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="Enter your first name" required>
+                        <div class="error-message" id="firstNameError">Please enter your first name</div>
+                    </div>
+                    <div class="form-group" id="lastNameGroup">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="Enter your last name" required>
+                        <div class="error-message" id="lastNameError">Please enter your last name</div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="emailGroup">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
+                    <i class="fas fa-envelope input-icon"></i>
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+                
+                <div class="form-group" id="phoneGroup">
+                    <label for="phone" class="form-label">Mobile Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Enter your mobile number" required>
+                    <i class="fas fa-phone input-icon"></i>
+                    <div class="error-message" id="phoneError">Please enter a valid mobile number (8-12 digits)</div>
+                </div>
+                
+                <div class="form-group" id="passwordGroup">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Create a password" required>
+                    <i class="fas fa-lock input-icon"></i>
+                    <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="passwordStrength"></div>
+                    </div>
+                    <div class="error-message" id="passwordError">Password must be at least 8 characters with uppercase, lowercase, number and special character</div>
+                </div>
+                
+                <div class="form-group" id="confirmPasswordGroup">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+                    <i class="fas fa-lock input-icon"></i>
+                    <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+                </div>
+                
+                <div class="terms-check">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                <div class="error-message" id="termsError" style="margin-top: -15px; margin-bottom: 15px;">You must agree to the terms</div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </div>
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="login.html">Sign in</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="fas fa-university fa-lg" style="color: var(--primary-color);"></i>
+                        <span class="footer-logo-text">DBS Bank</span>
+                    </div>
+                    <p>DBS is a leading financial services group in Asia with a presence in 18 markets. We are headquartered in Singapore.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Products</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Credit Cards</a>
+                        <a href="#" class="footer-link">Loans</a>
+                        <a href="#" class="footer-link">Savings Accounts</a>
+                        <a href="#" class="footer-link">Investments</a>
+                        <a href="#" class="footer-link">Insurance</a>
+                    </div>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Services</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Digital Banking</a>
+                        <a href="#" class="footer-link">Mobile Banking</a>
+                        <a href="#" class="footer-link">ATM Locator</a>
+                        <a href="#" class="footer-link">Branch Locator</a>
+                        <a href="#" class="footer-link">Financial Planning</a>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <p><i class="fas fa-phone"></i> +65 6327 2265</p>
+                    <p><i class="fas fa-envelope"></i> service@dbs.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 12 Marina Boulevard, Marina Bay Financial Centre Tower 3, Singapore 018982</p>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2023 DBS Bank Ltd. Co. Reg. No. 196800306E. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navigation = document.getElementById('navigation');
+        
+        if (mobileMenuBtn && navigation) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navigation.classList.toggle('active');
+            });
+        }
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        if (themeToggle) {
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+            
+            // Theme toggle click event
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+            
+            function updateThemeIcon(theme) {
+                const icon = themeToggle.querySelector('i');
+                if (theme === 'dark') {
+                    icon.className = 'fas fa-sun';
+                } else {
+                    icon.className = 'fas fa-moon';
+                }
+            }
+        }
+        
+        // Set active link based on current page
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'first.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href').split('/').pop();
+                if (linkPage === currentPage || 
+                    (currentPage === 'index.html' && linkPage === 'credit-cards') ||
+                    (currentPage === 'first.html' && linkPage === '')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                // Check if it's an anchor link on the same page
+                if (targetId.startsWith('#') && !this.classList.contains('nav-link')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (navigation) navigation.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

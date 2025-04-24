@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBS Bank Credit Cards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC&family=Noto+Sans+Tamil&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Updated DBS Theme Variables */
+            --primary-color: #ED1C24;
+            --primary-light: #fef0f0;
+            --primary-dark: #c4161d;
+            --secondary-color: #231F20;
+            --text-color: #333333;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --light-gray: #e5e7eb;
+            --medium-gray: #9ca3af;
+            --dark-gray: #4b5563;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 4px;
+            --header-bg: #ffffff;
+            --footer-bg: #231F20;
+            --footer-text: #ffffff;
+            --footer-link: #9ca3af;
+            --input-bg: #ffffff;
+            --input-border: #e5e7eb;
+        }
+
+        html[data-theme='dark'] {
+            --primary-color: #FF464E;
+            --primary-light: #3d2325;
+            --primary-dark: #FF464E;
+            --secondary-color: #f3f4f6;
+            --text-color: #e5e7eb;
+            --bg-color: #111827;
+            --card-bg: #1f2937;
+            --light-gray: #374151;
+            --medium-gray: #6b7280;
+            --dark-gray: #9ca3af;
+            --white: #1f2937;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.16);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+            --header-bg: #1f2937;
+            --footer-bg: #111827;
+            --footer-text: #e5e7eb;
+            --footer-link: #9ca3af;
+            --input-bg: #374151;
+            --input-border: #4b5563;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Updated header styling to match DBS.com.sg */
+        .header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--light-gray);
+            padding: 0;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar {
+            background-color: #f5f5f5;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--dark-gray);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-links a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .top-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            position: relative;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active:after {
+            width: 100%;
+        }
+
+        .login-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--text-color);
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            margin-left: 15px;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* Hero section styling */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #8B0000 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto 0 0;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            background-image: url('/api/placeholder/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Buttons styling */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .button-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .button-secondary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .button-large {
+            padding: 14px 28px;
+            font-size: 16px;
+        }
+
+        /* Card slider styling */
+        .card-slider {
+            margin: 30px 0;
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            background: #f5f5f5;
+            padding: 40px 0;
+        }
+
+        .slider-track {
+            display: flex;
+            animation: cardSlide 30s linear infinite;
+        }
+
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+
+        .slider-item {
+            flex: 0 0 300px;
+            margin: 0 15px;
+        }
+
+        .card-preview {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #8B0000 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Credit cards section styling */
+        .credit-cards {
+            padding: 60px 0;
+            background-color: var(--bg-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            font-size: 16px;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .credit-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 25px;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .credit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            font-size: 32px;
+            color: var(--primary-color);
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--secondary-color);
+        }
+
+        .card-description {
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .card-features {
+            margin-bottom: 25px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .feature-icon {
+            color: var(--primary-color);
+            margin-right: 12px;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* Benefits section styling */
+        .benefits {
+            background-color: var(--primary-light);
+            padding: 60px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s;
+            border: 1px solid var(--light-gray);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .benefit-icon {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            height: 60px;
+            width: 60px;
+            line-height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            margin: 0 auto 20px;
+        }
+
+        .benefit-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--secondary-color);
+        }
+
+        /* Apply section styling */
+        .apply-section {
+            text-align: center;
+            padding: 60px 0;
+            background-color: var(--card-bg);
+        }
+
+        .apply-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .apply-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .apply-steps:before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background-color: var(--light-gray);
+            z-index: 0;
+        }
+
+        .step {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-label {
+            color: var(--dark-gray);
+            font-size: 14px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* FAQ section styling */
+        .faq {
+            padding: 60px 0;
+            background-color: var(--bg-color);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background-color: var(--card-bg);
+            padding: 18px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .faq-question:hover {
+            background-color: var(--primary-light);
+        }
+
+        .faq-answer {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 18px;
+            max-height: 500px;
+        }
+
+        /* Footer styling */
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--footer-text);
+            margin-left: 10px;
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--footer-text);
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-heading:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-link {
+            color: var(--footer-link);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-link:hover {
+            color: var(--footer-text);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-contact p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .footer-copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        /* Responsive styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navigation {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--header-bg);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow-md);
+                z-index: 100;
+                text-align: center;
+            }
+            
+            .navigation.active {
+                display: flex;
+            }
+            
+            .top-bar-content {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .top-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .apply-steps {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            
+            .apply-steps:before {
+                display: none;
+            }
+            
+            .step {
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .hero-image {
+                display: none;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-heading:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-about {
+                max-width: 100%;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer-contact p {
+                justify-content: center;
+            }
+        }
+
+        /* Floating action button */
+        .floating-action {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+        }
+
+        .scroll-to-top {
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Card slider animation */
+        @keyframes cardSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="top-links">
+                    <a href="#">Personal Banking</a>
+                    <a href="#">Wealth Management</a>
+                    <a href="#">Corporate Banking</a>
+                    <a href="#">SME Banking</a>
+                    <a href="#">About Us</a>
+                </div>
+                <div class="top-links">
+                    <a href="#">Contact Us</a>
+                    <a href="#">Locations</a>
+                    <a href="#">Singapore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-university fa-lg" style="color: var(--primary-color);"></i>
+                    <span class="logo-text">DBS Bank</span>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="navigation" id="navigation">
+                    <a href="{{ url_for('home') }}" class="nav-link active">Home</a>
+                    <a href="{{ url_for('credit_cards') }}" class="nav-link">Credit Cards</a>
+                    <a href="#benefits" class="nav-link">Benefits</a>
+                    <a href="#apply" class="nav-link">Apply Now</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                </nav>
+                <div style="display: flex; align-items: center;">
+                    <a href="{{ url_for('login') }}" class="login-button">Login</a>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Unlock a World of Possibilities</h1>
+                <p>Discover DBS Bank's range of credit cards designed to fit your lifestyle and financial needs.</p>
+                <a href="apply.html" class="button button-large">Apply Now</a>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </div>
+
+    <div class="card-slider">
+        <div class="slider-track">
+            <div class="slider-item">
+                <div class="card-preview" style="background: linear-gradient(135deg, #333 0%, #888 100%);">
+                    <div class="card-preview-logo">
+                        <span>DBS Platinum</span>
+                        <i class="fab fa-cc-visa"></i>
+                    </div>
+                    <div class="card-chip"></div>
+                    <div class="card-number">**** **** **** 1234</div>
+                    <div class="card-holder">
+                        <span>CARD HOLDER</span>
+                        <span>EXPIRES 04/28</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item">
+                <div class="card-preview" style="background: linear-gradient(135deg, #D4AF37 0%, #FBF5B7 100%); color: #333;">
+                    <div class="card-preview-logo">
+                        <span>DBS Gold</span>
+                        <i class="fab fa-cc-mastercard"></i>
+                    </div>
+                    <div class="card-chip"></div>
+                    <div class="card-number">**** **** **** 5678</div>
+                    <div class="card-holder">
+                        <span>CARD HOLDER</span>
+                        <span>EXPIRES 04/28</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item">
+                <div class="card-preview" style="background: linear-gradient(135deg, #1E88E5 0%, #64B5F6 100%);">
+                    <div class="card-preview-logo">
+                        <span>DBS Standard</span>
+                        <i class="fab fa-cc-visa"></i>
+                    </div>
+                    <div class="card-chip"></div>
+                    <div class="card-number">**** **** **** 9012</div>
+                    <div class="card-holder">
+                        <span>CARD HOLDER</span>
+                        <span>EXPIRES 04/28</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Duplicate cards for continuous slider effect -->
+            <div class="slider-item">
+                <div class="card-preview" style="background: linear-gradient(135deg, #333 0%, #888 100%);">
+                    <div class="card-preview-logo">
+                        <span>DBS Platinum</span>
+                        <i class="fab fa-cc-visa"></i>
+                    </div>
+                    <div class="card-chip"></div>
+                    <div class="card-number">**** **** **** 1234</div>
+                    <div class="card-holder">
+                        <span>CARD HOLDER</span>
+                        <span>EXPIRES 04/28</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item">
+                <div class="card-preview" style="background: linear-gradient(135deg, #D4AF37 0%, #FBF5B7 100%); color: #333;">
+                    <div class="card-preview-logo">
+                        <span>DBS Gold</span>
+                        <i class="fab fa-cc-mastercard"></i>
+                    </div>
+                    <div class="card-chip"></div>
+                    <div class="card-number">**** **** **** 5678</div>
+                    <div class="card-holder">
+                        <span>CARD HOLDER</span>
+                        <span>EXPIRES 04/28</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="credit-cards" class="credit-cards">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Credit Cards</h2>
+                <p>Choose from our range of credit cards designed to suit your lifestyle and spending habits.</p>
+            </div>
+            <div class="card-grid">
+                <div class="credit-card">
+                    <div class="card-header">
+                        <h3 class="card-title">DBS Altitude Visa Signature</h3>
+                        <i class="fas fa-plane card-icon"></i>
+                    </div>
+                    <p class="card-description">Earn miles faster with 3 miles per S$1 on online flight and hotel bookings, and 2 miles per S$1 overseas.</p>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Annual Fee: S$192.60 (waived first year)</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Complimentary travel insurance</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Airport lounge access</span>
+                        </div>
+                    </div>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                
+                <div class="credit-card">
+                    <div class="card-header">
+                        <h3 class="card-title">DBS Live Fresh</h3>
+                        <i class="fas fa-shopping-bag card-icon"></i>
+                    </div>
+                    <p class="card-description">Get up to 5% cashback on online, contactless and eco-friendly spending. Plus, enjoy exclusive dining deals.</p>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Annual Fee: S$192.60 (waived first year)</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>No minimum spend required</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Cashback capped at S$60 per month</span>
+                        </div>
+                    </div>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                
+                <div class="credit-card">
+                    <div class="card-header">
+                        <h3 class="card-title">DBS Woman's World Card</h3>
+                        <i class="fas fa-female card-icon"></i>
+                    </div>
+                    <p class="card-description">Earn 4 miles per S$1 on online fashion, beauty and department store spend. Plus, exclusive privileges for women.</p>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Annual Fee: S$192.60 (waived first year)</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Complimentary airport transfers</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Exclusive shopping deals</span>
+                        </div>
+                    </div>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                
+                <div class="credit-card">
+                    <div class="card-header">
+                        <h3 class="card-title">DBS Black Visa</h3>
+                        <i class="fas fa-gem card-icon"></i>
+                    </div>
+                    <p class="card-description">Premium privileges including 1.5% cashback on all spend, unlimited access to airport lounges worldwide.</p>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Annual Fee: S$488.40 (first year waived with min. spend)</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Complimentary travel insurance</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>24/7 concierge service</span>
+                        </div>
+                    </div>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                
+                <div class="credit-card">
+                    <div class="card-header">
+                        <h3 class="card-title">DBS Esso Platinum</h3>
+                        <i class="fas fa-gas-pump card-icon"></i>
+                    </div>
+                    <p class="card-description">Save up to 21% on fuel at Esso stations and earn up to 6% cashback on Esso fuel and convenience store purchases.</p>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Annual Fee: S$171.60 (waived first year)</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Additional 3% cashback on groceries</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>No minimum spend required</span>
+                        </div>
+                    </div>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+                
+                <div class="credit-card">
+                    <div class="card-header">
+                        <h3 class="card-title">DBS YOLO</h3>
+                        <i class="fas fa-utensils card-icon"></i>
+                    </div>
+                    <p class="card-description">Enjoy 6% cashback on dining, entertainment and nightlife spend. Perfect for foodies and party-goers.</p>
+                    <div class="card-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Annual Fee: S$192.60 (waived first year)</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Minimum spend of S$600 per month</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle feature-icon"></i>
+                            <span>Exclusive dining deals</span>
+                        </div>
+                    </div>
+                    <a href="#" class="button button-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose DBS Credit Cards</h2>
+                <p>Experience exclusive benefits and rewards tailored to your lifestyle.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="benefit-title">Cashback Rewards</h3>
+                    <p>Earn cashback on your everyday spending with no minimum redemption amount.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3 class="benefit-title">Travel Miles</h3>
+                    <p>Convert your spending to air miles and enjoy complimentary travel insurance.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3 class="benefit-title">Interest-Free Installments</h3>
+                    <p>Convert large purchases into manageable monthly payments with 0% interest.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3 class="benefit-title">Exclusive Discounts</h3>
+                    <p>Enjoy special deals and promotions at partner merchants across Singapore.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="apply" class="apply-section">
+        <div class="container">
+            <div class="apply-content">
+                <div class="section-title">
+                    <h2>How to Apply</h2>
+                    <p>Getting your DBS credit card is quick and easy. Follow these simple steps.</p>
+                </div>
+                <div class="apply-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Choose your preferred card</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Check eligibility requirements</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Fill in the application form</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Submit supporting documents</div>
+                    </div>
+                </div>
+                <a href="#" class="button button-large">Apply Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about DBS credit cards.</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What are the eligibility requirements for a DBS credit card?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To be eligible for a DBS credit card, you must be at least 21 years old, have a minimum annual income of S$30,000 (S$45,000 for foreigners), and meet our credit assessment criteria. Some premium cards may have higher income requirements.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does it take to process my credit card application?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most applications are processed within 7-10 working days upon receipt of all required documents. If you're an existing DBS/POSB customer with your income credited to your DBS/POSB account, processing may be faster.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How can I check my credit card application status?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can check your application status online through DBS iBanking or the DBS Digibank app. Alternatively, you may call our hotline at +65 1800 111 1111 for assistance.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What should I do if my credit card is lost or stolen?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If your card is lost or stolen, please call our 24-hour hotline at +65 1800 339 6966 immediately to report it. We will block your card to prevent unauthorized transactions and arrange for a replacement card to be sent to you.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I activate my new credit card?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can activate your new DBS credit card through the DBS Digibank app, via DBS iBanking, or by calling our automated activation hotline at +65 6333 0033. You'll need your card details and some personal information for verification.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <i class="fas fa-university fa-lg" style="color: var(--primary-color);"></i>
+                        <span class="footer-logo-text">DBS Bank</span>
+                    </div>
+                    <p>DBS is a leading financial services group in Asia with a presence in 18 markets. We are headquartered in Singapore.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Products</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Credit Cards</a>
+                        <a href="#" class="footer-link">Loans</a>
+                        <a href="#" class="footer-link">Savings Accounts</a>
+                        <a href="#" class="footer-link">Investments</a>
+                        <a href="#" class="footer-link">Insurance</a>
+                    </div>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Services</h4>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Digital Banking</a>
+                        <a href="#" class="footer-link">Mobile Banking</a>
+                        <a href="#" class="footer-link">ATM Locator</a>
+                        <a href="#" class="footer-link">Branch Locator</a>
+                        <a href="#" class="footer-link">Financial Planning</a>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <p><i class="fas fa-phone"></i> +65 6327 2265</p>
+                    <p><i class="fas fa-envelope"></i> service@dbs.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 12 Marina Boulevard, Marina Bay Financial Centre Tower 3, Singapore 018982</p>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2023 DBS Bank Ltd. Co. Reg. No. 196800306E. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="floating-action">
+        <div class="scroll-to-top" id="scrollToTop">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navigation = document.getElementById('navigation');
+        
+        if (mobileMenuBtn && navigation) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navigation.classList.toggle('active');
+            });
+        }
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        if (themeToggle) {
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+            
+            // Theme toggle click event
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+            
+            function updateThemeIcon(theme) {
+                const icon = themeToggle.querySelector('i');
+                if (theme === 'dark') {
+                    icon.className = 'fas fa-sun';
+                } else {
+                    icon.className = 'fas fa-moon';
+                }
+            }
+        }
+        
+        // Set active link based on current page
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'first.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href').split('/').pop();
+                if (linkPage === currentPage || 
+                    (currentPage === 'index.html' && linkPage === 'credit-cards') ||
+                    (currentPage === 'first.html' && linkPage === '')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+        
+       // Smooth scrolling for anchor links (only for # links, not .nav-link)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Only prevent default for # links that are NOT .nav-link
+                if (href !== '#' && !this.classList.contains('nav-link')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (navigation) navigation.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

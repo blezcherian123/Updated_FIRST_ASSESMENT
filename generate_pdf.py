@@ -558,9 +558,22 @@ class StatementGenerator:
 
 
 # Serve the index.html page
-@app.route('/')
-def index():
-    return render_template('index.html')
+@app.route("/")
+def home():
+    return render_template("first.html")
+
+@app.route("/creditcards")
+def credit_cards():
+    return render_template("index.html")
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
 
 @app.route('/api/languages')
 def get_languages():
@@ -598,46 +611,65 @@ def generate_pdf_route():
     """Generate and return PDF statement."""
     try:
         customer_id = request.args.get('customer_id')
-        language = request.args.get('language', 'en')  # Default to English
+        language = request.args.get('language', 'en')
+        
+        logger.info(f"Starting PDF generation for customer_id: {customer_id}, language: {language}")
         
         if not customer_id:
+            logger.warning("No customer_id provided")
             return "Customer ID is required", 400
             
         try:
             customer_id = int(customer_id)
         except ValueError:
+            logger.warning(f"Invalid customer_id format: {customer_id}")
             return "Invalid customer ID format", 400
 
         # Fetch data from database
         db = DatabaseConnection(config)
         customer, account, transactions = db.fetch_customer_data(customer_id)
+        
+        logger.info(f"Database fetch results - Customer: {customer is not None}, "
+                   f"Account: {account is not None}, "
+                   f"Transactions: {len(transactions) if transactions else 0}")
 
         if not customer:
+            logger.warning(f"Customer not found for ID: {customer_id}")
             return "Customer not found", 404
             
         if not account:
+            logger.warning(f"No account found for customer ID: {customer_id}")
             return "No account found for this customer", 404
 
         # Generate PDF
         generator = StatementGenerator()
-        pdf_io = generator.generate_statement_pdf(customer, account, transactions, language)
-
-        if not pdf_io:
-            return "Failed to generate PDF statement", 500
-
-        # Format filename for download
-        filename = f"DBS_Statement_{customer['first_name']}_{customer['last_name']}_{datetime.today().strftime('%Y%m%d')}.pdf"
+        logger.info("Attempting to generate PDF...")
         
-        return send_file(
-            pdf_io, 
-            as_attachment=True, 
-            download_name=filename, 
-            mimetype="application/pdf"
-        )
+        try:
+            pdf_io = generator.generate_statement_pdf(customer, account, transactions, language)
+            if not pdf_io:
+                logger.error("PDF generation returned None")
+                return "Failed to generate PDF statement", 500
+                
+            logger.info("PDF generated successfully")
+            
+            # Format filename for download
+            filename = f"DBS_Statement_{customer['first_name']}_{customer['last_name']}_{datetime.today().strftime('%Y%m%d')}.pdf"
+            
+            return send_file(
+                pdf_io,
+                as_attachment=True,
+                download_name=filename,
+                mimetype='application/pdf'
+            )
+            
+        except Exception as pdf_error:
+            logger.error(f"PDF generation error: {str(pdf_error)}", exc_info=True)
+            return f"Error generating PDF: {str(pdf_error)}", 500
         
     except Exception as e:
-        logger.error(f"Error in generate_statement route: {e}", exc_info=True)
-        return "An error occurred while generating the statement", 500
+        logger.error(f"Error in generate_statement route: {str(e)}", exc_info=True)
+        return f"An error occurred while generating the statement: {str(e)}", 500
 
 @app.errorhandler(404)
 def not_found(error):
